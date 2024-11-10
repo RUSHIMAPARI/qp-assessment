@@ -1,0 +1,53 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+server:
+  port: 8081
+  tomcat:
+    threads:
+      max: 500
+    connection-timeout: 5400000ms
+    max-connections: 15000
+    max-http-form-post-size: 8MB
+      
+spring:
+  application:
+    name: grocery-management-service
+  mvc: 
+    async:
+      request-timeout: 60000ms
+  profiles:
+    active:
+    - dev
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+app:
+  jwtSecret: re\*4&)a7_x&9
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile:
+      - dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/qp_assessment
+    username: postgres
+    password: root
+  
+app:
+  selfUrl: http://localhost:8081
